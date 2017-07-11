@@ -1,0 +1,218 @@
+.container {
+  width: 710px;
+}
+
+body {
+  background: #7EA0D6;
+}
+
+header {
+  padding-top: 20px;
+  /* height: 75px;   43px; */
+}
+
+section img {
+}
+
+section {
+  margin-top: 2em;
+  font-size: 120%;
+  padding: 20px;
+  background: #fff;
+}
+
+section h1 {
+  font-size: 200%;
+}
+
+/* tables */
+
+th, td, caption {
+  padding: 0; 
+}
+
+/* Links */
+
+a {
+  color: #06C;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #76C0F5;
+  text-decoration: underline;
+}
+
+a:visited {
+  text-decoration: none;
+}
+
+
+/* Navigation */
+
+nav {
+  float: left;
+}
+
+nav {
+  /* background-color: white; */
+  padding: 0 0.7em;
+  white-space: nowrap;
+}
+
+nav ul {
+  margin: 0;
+  padding: 0;
+}
+
+nav ul li {
+  list-style-type: none;
+  display: inline-block;
+  padding: 0.2em 0;
+}
+
+nav ul li a {
+  padding: 0 5px;
+  font-weight: bold;
+  /* color: #808080; */
+}
+
+nav ul li a:hover {
+  /* color: #c0c0c0; */
+  text-decoration: underline;
+}
+
+nav ul li a:visited {
+  text-decoration: none;  
+}
+
+/* Forms */
+
+div.field, div.actions {
+  margin-bottom: 10px;
+}
+
+.text_field {
+  padding: 5px;
+}
+
+.text_field label {
+  float:left;
+  text-align:right;
+  width: 120px;
+}
+
+.text_field input {
+  margin 0;
+}
+
+/* Sign up button */
+
+.signin_button {
+  margin-left: 130px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  width: 100px;
+  height: 30px;
+  font-weight: bold;
+}
+
+.save_button, .delete_button {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  width: 100px;
+  height: 30px;
+  font-weight: bold;
+  float: right;
+}
+
+.forgot {
+  font-size: 75%;
+}
+
+/* Round corners */
+
+.round {
+  -moz-border-radius:    10px;
+  -webkit-border-radius: 10px;
+  border-radius:         10px;
+  behavior: url(/pie/PIE.htc);
+}
+
+/* Footer */
+
+footer {
+  text-align: center;
+  margin-top: 10px;
+  width: 710px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+footer nav {
+  float: none;
+}
+
+/* Users */
+
+ul.users {
+  margin-top: 1em;
+}
+
+.users li {
+  list-style: none;
+}
+
+
+/* Upload page */
+
+uiElements table tr td {
+  padding: 0;
+}
+
+/* Error messages */
+
+.flash {
+  width: 400px;
+}
+
+.field_with_errors {
+  margin-top: 10px;
+  padding: 2px;
+  background-color: red;
+  display: table;
+}
+
+.field_with_errors label {
+  color: #fff;
+}
+
+#error_explanation {
+  width: 400px;
+  border: 2px solid red;
+  padding: 7px;
+  padding-bottom: 12px;
+  margin-bottom: 20px;
+  background-color: #f0f0f0;
+}
+
+#error_explanation h2 {
+  text-align: left;
+  font-weight: bold;
+  padding: 5px 5px 5px 15px;
+  font-size: 12px;
+  margin: -7px;
+  background-color: #c00;
+  color: #fff;
+}
+
+#error_explanation p {
+  color: #333;
+  margin-bottom: 0;
+  padding: 5px;
+}
+
+#error_explanation ul li {
+  font-size: 12px;
+  list-style: square;
+}

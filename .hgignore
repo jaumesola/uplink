@@ -1,0 +1,12 @@
+syntax: glob
+
+tmp/pids/server.pid
+.DS_Store
+.bundle
+.project
+Gemfile.lock
+db/*.sqlite3
+log/*.log
+tmp/*
+uploads/*/*
+webrat.log

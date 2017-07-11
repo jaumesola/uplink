@@ -1,0 +1,38 @@
+<% ############################### Up'n'Link Trunk ############################
+# Copyright (C) 2012 Jaume Sola - jaumesola.com - upnlink.com
+# This software is publicly available under the GPL v3 license terms.
+# You may also obtain it under alternative licenses.
+# Other files packaged along this one may have a different licensing.
+# See the /LICENSE file or http://jaumesola.com/licenses/upnlink.html
+############################################################################ %>
+<h1>Editing upload <%= @upload.id %></h1>
+
+<%= form_for @upload do |f| %>
+  <%# render 'shared/error_messages', :object => f.object %>
+  <div class="field">
+    <%= label nil,nil, 'File name' %> : <%= @upload.filename %>
+  </div>
+
+  <div class="field">
+    <%= label nil,nil,'Download link' %> : <%= link_to download_link, download_link %>
+  </div>
+
+  <div class="field">
+    <%= f.label :user_id %> : <%= @upload.user.email %>
+  </div>
+   <div class="field">
+    <%= f.label :email_to %><br />
+    <%= f.text_field :email_to %>
+  </div>
+  <div class="field">
+    <%= f.label :message %><br />
+    <%= f.text_area :message, :rows => 10, :cols => 60 %>
+  </div>   
+  <div class="field">
+    <%= f.label :expiration %><br />
+    <%= f.date_select :expiration %>
+  </div>
+  
+<%= render :partial => 'shared/save_delete_buttons', :locals => { :save_class => 'save_button'} %>
+
+<% end %>

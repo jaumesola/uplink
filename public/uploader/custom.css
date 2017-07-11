@@ -1,0 +1,28 @@
+
+      .uploadButton a, .clearButton a {
+         display:block;
+         width:100px;
+         height:40px;
+         text-decoration: none;
+         margin-left:5px;
+      }
+
+      .uploadButton a {
+         background: url("/uploader/uploadFileButton.png") 0 0 no-repeat;
+      }
+
+      .clearButton a {
+         background: url("/uploader/clearListButton.png") 0 0 no-repeat;
+      }
+
+       .uploadButton a:visited, .clearButton a:visited {
+         background-position: 0 0;
+      }
+
+       .uploadButton a:hover, .clearButton a:hover {  
+         background-position: 0 -40px;
+      }
+
+       .uploadButton a:active, .clearButton a:active {
+         background-position: 0 -80px;
+      }

@@ -1,0 +1,24 @@
+<% ############################### Up'n'Link Trunk ############################
+# Copyright (C) 2012 Jaume Sola - jaumesola.com - upnlink.com
+# This software is publicly available under the GPL v3 license terms.
+# You may also obtain it under alternative licenses.
+# Other files packaged along this one may have a different licensing.
+# See the /LICENSE file or http://jaumesola.com/licenses/upnlink.html
+############################################################################ %>
+<h2>Change your password</h2>
+
+<p>
+  Your password has been reset. Choose a new password below.
+</p>
+
+<%= form_for(:user,
+             :url  => user_password_path(@user, :token => @user.confirmation_token),
+             :html => { :method => :put }) do |form| %>
+  <div class="password_field">
+    <%= form.label :password, "New password" %>: 
+    <%= form.password_field :password %>
+  </div>
+  <div class="submit_field">
+    <%= form.submit "Save", :class => "signin_button" %>
+  </div>
+<% end %>

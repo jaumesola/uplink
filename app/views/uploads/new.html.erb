@@ -1,0 +1,337 @@
+<% ############################### Up'n'Link Trunk ############################
+# Copyright (C) 2012 Jaume Sola - jaumesola.com - upnlink.com
+# This software is publicly available under the GPL v3 license terms.
+# You may also obtain it under alternative licenses.
+# Other files packaged along this one may have a different licensing.
+# See the /LICENSE file or http://jaumesola.com/licenses/upnlink.html
+############################################################################ %>
+<!-- Dependencies -->
+<script src="/yui-2.9.0/build/yahoo-dom-event/yahoo-dom-event.js"></script>
+<script src="/yui-2.9.0/build/element/element-min.js"></script>
+
+<!-- Source files -->
+<script src="/yui-2.9.0/build/uploader/uploader-min.js"></script>
+<script src="/yui-2.9.0/build/cookie/cookie-min.js"></script>
+
+<style type="text/css"> 
+   .uploadButton a, .clearButton a {
+      display:block;
+      width:100px;
+      height:40px;
+      text-decoration: none;
+      margin-right:5px;
+   }
+   
+   .uploadButton a {
+      background: url("/uploader/uploadFileButton.png") 0 0 no-repeat;
+   }
+   
+   .clearButton a {
+      background: url("/uploader/clearListButton.png") 0 0 no-repeat;
+   }
+   
+    .uploadButton a:visited, .clearButton a:visited {
+      background-position: 0 0;
+   }
+   
+    .uploadButton a:hover, .clearButton a:hover {  
+      background-position: 0 -40px;
+   }
+   
+    .uploadButton a:active, .clearButton a:active {
+      background-position: 0 -80px;
+   }
+</style>
+
+<h2>Upload file</h2>
+
+<div id="uiElements" >
+<table>
+<tr><td>
+
+<script type="text/javascript">
+
+function switchField( pele, pvisible ) {
+    element = document.getElementById( pele );
+    visible = element.style.display;
+    // recursive case for the other element
+    if ( visible == pvisible ) {
+       return;
+    }
+    sw = document.getElementById( 'switch_' + pele );
+    label = document.getElementById( 'label_' + pele );
+    if ( visible == 'none' ) {
+      // Show
+      sw.innerHTML = '[-]'
+      label.style.fontWeight = 'bold';
+      element.style.display = 'block';
+      if ( pele == 'message' ) {
+         switchField('email_to','block');
+      }      
+    } else {
+      // Hide
+      sw.innerHTML = '[+]'
+      label.style.fontWeight = 'lighter';
+      element.style.display = 'none';
+      element.value = '';
+      if ( pele == 'email_to' ) {
+         switchField('message','none');
+      }
+    }   
+}
+</script>
+
+<div id="postVars" style="display:block">
+  <div class="field"> 
+    <a id="switch_email_to" href="#" onclick="switchField('email_to','');">[+]</a>
+    <label id="label_email_to" for="email_to" style="font-weight:normal">Recipient's email (optional)<br /></label> 
+    <input id="email_to" name="email_to" type="email" style="display:none;width:400px" /> 
+  </div>   
+  <div class="field"> 
+    <a id="switch_message" href="#" onclick="switchField('message','');">[+]</a>
+    <label id="label_message" for="message" style="font-weight:normal">Message for the recipient (optional)<br /></label> 
+    <textarea id="message" name="message" rows="6" style="display:none;width:400px" /></textarea>
+  </div>
+</div>
+</td></tr>
+
+<tr><td>
+<div id="uploaderButtons" style="width:400px;">
+   <div id="uploaderUI" style="width:100px;height:40px;margin-left:0;float:left;"></div>
+   <div id="uploadButton" class="uploadButton" style="float:left;display:none">
+      <a class="rolloverButton" href="#" onClick="upload(); return false;"></a>
+   </div>
+   <div id="resetButton" class="clearButton" style="float:left;display:none">
+      <a class="rolloverButton" href="#" onClick="handleClearFiles(); return false;"></a>
+   </div>
+   <!--
+   <div class="small" style="float:right;vertical-align:bottom;"> <a href="#" onclick="noflash();">no flash</a></div>
+   -->
+   <br />
+</div>
+</td></tr>
+
+<tr><td>
+   <div id="fileProgress" style="border:1px solid #bbb; width:400px; margin-top: 6px; height:100px; float:left">
+      <div id="fileName" style="text-align:center; margin:5px; font-size:15px; width:390px; height:70px; overflow:hidden"></div>
+      <div id="progressBar" style="width:400px;height:20px;background-color:#CCCCCC"></div>
+   </div>
+</td></tr>
+
+<tr><td>
+
+<br />
+
+<div id="linkdiv" style="display:none">
+   <div id="linklink"></div>
+   <textarea id="linktext" rows="1" style="width:400px" /></textarea>
+   <!-- <br /><span class="small">You can now copy the link above, e.g. using Control-C</span>  -->
+</div>
+
+</td></tr>
+
+</table>
+</div>
+
+<!--
+<div id="noflash" style="display:none">
+
+<%= form_for( @upload, :html => { :multipart => true } ) do |f| %>
+  <% if @upload.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@upload.errors.count, "error") %> prohibited this upload from being saved:</h2>
+
+      <ul>
+      <% @upload.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :attachment %>
+    <%= f.file_field :attachment %>
+  </div>
+  <div class="actions">
+    <%= f.submit 'Upload file' %>
+  </div>
+<% end %>
+
+</div>
+-->
+
+
+<script type="text/javascript">
+
+function hideElement(p) {
+   var e = document.getElementById(p); 
+   e.style.display = "none";  
+}
+function showElement(p) {
+   var e = document.getElementById(p); 
+   e.style.display = "block";
+}
+
+function noflash() {
+   showElement("noflash");
+   hideElement("uploaderButtons");
+   hideElement("fileProgress");
+}
+  
+   // Instantiate the uploader and write it to its placeholder div.
+   
+   YAHOO.widget.Uploader.SWFURL = "/uploader/uploader.swf";
+   
+   var uploader = new YAHOO.widget.Uploader( "uploaderUI", "/uploader/selectFileButton.png" );
+
+   uploader.addListener('contentReady', handleContentReady);
+   uploader.addListener('fileSelect',onFileSelect)
+   uploader.addListener('uploadStart',onUploadStart);
+   uploader.addListener('uploadProgress',onUploadProgress);
+   uploader.addListener('uploadCancel',onUploadCancel);
+   uploader.addListener('uploadComplete',onUploadComplete);
+   uploader.addListener('uploadCompleteData',onUploadResponse);
+   uploader.addListener('uploadError', onUploadError);
+
+   function handleContentReady () {
+       // Allows the uploader to send log messages to trace, as well as to YAHOO.log
+      uploader.setAllowLogging(true);
+      
+      // Restrict selection to a single file (that's what it is by default,
+      // just demonstrating how).
+      uploader.setAllowMultipleFiles(false);
+      
+   }
+   
+   var fileID;
+   function onFileSelect(event) {
+      
+      for (var item in event.fileList) {
+          if(YAHOO.lang.hasOwnProperty(event.fileList, item)) {
+            YAHOO.log(event.fileList[item].id);
+            fileID = event.fileList[item].id;
+         }
+      }
+      uploader.disable();
+   
+      var filename = document.getElementById("fileName");
+      filename.innerHTML = event.fileList[fileID].name;
+   
+      var progressbar = document.getElementById("progressBar");
+      progressbar.innerHTML = "";
+
+      var uploaderUI = document.getElementById("uploaderUI");
+      uploaderUI.style.width = "1px";
+      uploaderUI.style.height = "1px";
+      
+      var uploadButton = document.getElementById("uploadButton");
+      uploadButton.style.display = "block";
+      
+      var resetButton = document.getElementById("resetButton");
+      resetButton.style.display = "block";
+   }
+   
+   // Actually uploads the files. Since we are only allowing one file
+   // to be selected, we use the upload function, in conjunction with the id 
+   // of the selected file (returned by the fileSelect event). We are also including
+   // the text of the variables specified by the user in the input UI.
+ 
+   function upload() {
+      if (fileID != null) {
+
+         var uploadButton = document.getElementById("uploadButton");
+         uploadButton.style.display = "none";
+         
+         var filename = document.getElementById("fileName");
+         filename.innerHTML = "Uploading " + filename.innerHTML + "...";
+         
+         var docCookie = YAHOO.util.Cookie.get("remember_token");   
+         
+         uploader.upload(fileID, "/uploads", "POST", 
+            { remember_token:docCookie,
+              // authenticity_token:"< form_authenticity_token >",
+              email_to:document.getElementById("email_to").value,
+              message:document.getElementById("message").value });
+      }  
+   }   
+
+   function onUploadProgress(event) {
+      prog = Math.round(300*(event["bytesLoaded"]/event["bytesTotal"]));
+      progbar = "<div style=\"background-color: #f00; height: 20px; width: " + prog + "px\"/>";
+
+      var progressbar = document.getElementById("progressBar");
+      progressbar.innerHTML = progbar;
+   }
+   
+   function onUploadComplete(event) {
+      uploader.clearFileList();
+      uploader.enable();   
+      progbar = "<div style=\"background-color: #f00; height: 20px; width: 400px\"/>";
+      var progressbar = document.getElementById("progressBar");
+      progressbar.innerHTML = progbar;
+   }   
+   
+   // When the data is received back from the server, display it to the user
+   // in the server data text area.
+   function onUploadResponse(event) {
+      var filename = document.getElementById("fileName");
+      result = event.data;
+      fields = result.split('|');
+      filename.innerHTML = fields[1];
+
+      link = fields[0];
+      var linkdiv = document.getElementById("linkdiv");
+      var linktext = document.getElementById("linktext");
+      var linklink = document.getElementById("linklink");
+
+      linkdiv.style.display = "block";
+      linklink.innerHTML = '<a href="' + link + '">Download link</a><br />';
+      linktext.innerHTML = link;
+      linktext.focus();
+      linktext.select();
+   }
+   
+   function handleClearFiles() {
+      
+      uploader.cancel( fileID );
+      uploader.clearFileList();
+      uploader.enable();
+      fileID = null;
+   
+      var filename = document.getElementById("fileName");
+      filename.innerHTML = "";
+   
+      var progressbar = document.getElementById("progressBar");
+      progressbar.innerHTML = "";
+      
+      var linkdiv = document.getElementById("linkdiv");
+      linkdiv.style.display = 'none';
+         
+      var uploaderUI = document.getElementById("uploaderUI");
+      uploaderUI.style.width = "100px";
+      uploaderUI.style.height = "40px";
+      
+      var uploadButton = document.getElementById("uploadButton");
+      uploadButton.style.display = "none";      
+
+      var resetButton = document.getElementById("resetButton");
+      resetButton.style.display = "none";
+   }
+
+   function onUploadStart(event) {
+      //var filename = document.getElementById("fileName");
+      //filename.innerHTML = 'Starting upload...';      
+   }
+
+   function onUploadError(event) { 
+      var filename = document.getElementById("fileName");
+      filename.innerHTML = 'Upload error: ' + event.status;
+   }
+   
+   function onUploadCancel(event) {
+      var filename = document.getElementById("fileName");
+      filename.innerHTML = 'Upload cancelled';
+   }
+
+</script>

@@ -1,0 +1,31 @@
+<% ############################### Up'n'Link Trunk ############################
+# Copyright (C) 2012 Jaume Sola - jaumesola.com - upnlink.com
+# This software is publicly available under the GPL v3 license terms.
+# You may also obtain it under alternative licenses.
+# Other files packaged along this one may have a different licensing.
+# See the /LICENSE file or http://jaumesola.com/licenses/upnlink.html
+############################################################################ %>
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+  </head>
+<body>
+<style>
+  p { font-family: Verdana; font-size: 9pt; }
+</style>
+    
+    <p>The file "<%= @upload.filename %>" is available for download</p>
+   
+    <p>Download link: <a href="<%= @download_link %>"><%= @download_link %></a></p>
+
+    <% unless @upload.message == nil %>
+      <p>The sender included the following comments:</p>
+      <hr />
+      <p><%= @upload.message.gsub("\n","<br />").html_safe %></p>
+      <hr />
+    <% end %>
+    
+    <p>This download will expire on <%= @upload.expiration %></p>
+  </body>
+</html>

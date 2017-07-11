@@ -1,0 +1,20 @@
+<% ############################### Up'n'Link Trunk ############################
+# Copyright (C) 2012 Jaume Sola - jaumesola.com - upnlink.com
+# This software is publicly available under the GPL v3 license terms.
+# You may also obtain it under alternative licenses.
+# Other files packaged along this one may have a different licensing.
+# See the /LICENSE file or http://jaumesola.com/licenses/upnlink.html
+############################################################################ %>
+<h1>Existing users</h1>
+
+<table>
+  <tr>
+    <th></th>
+  </tr>
+
+<% @users.each do |user| %>
+  <tr>
+    <td><%= 'Admin ' if user.admin %><%= link_to user.email, edit_user_path(user) %></td>
+  </tr>
+<% end %>
+</table>

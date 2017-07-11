@@ -1,0 +1,31 @@
+<% ############################### Up'n'Link Trunk ############################
+# Copyright (C) 2012 Jaume Sola - jaumesola.com - upnlink.com
+# This software is publicly available under the GPL v3 license terms.
+# You may also obtain it under alternative licenses.
+# Other files packaged along this one may have a different licensing.
+# See the /LICENSE file or http://jaumesola.com/licenses/upnlink.html
+############################################################################ %>
+<header>
+  <nav class="round">
+    <ul>
+      <% if signed_in? && current_user.admin? -%>
+        <li><%= link_to "Upload file", root_path %></li>
+        <li><%= link_to 'New User', new_user_path %></li>
+        <li><%= link_to "Users", users_path %></li>
+        <li><%= link_to "Uploads", uploads_path %></li>
+      <% end -%>     
+       
+      <% if signed_in? -%>
+         <li><%= current_user.email %></li>      
+         <li><%= link_to "Sign out", sign_out_path, :method => :delete %></li>
+        
+      <% 
+      # Show sign in link only in not this page. In practice never shown.
+      elsif ! ( params[:controller] == 'clearance/sessions' and params[:action] == 'new' ) -%>
+        <li><%= link_to "Sign in", sign_in_path %></li>
+      <% end -%>  
+
+    </ul>
+    
+  </nav>
+</header>

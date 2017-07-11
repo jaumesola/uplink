@@ -1,0 +1,118 @@
+LICENSING INFORMATION FOR UP'N'LINK VERSION 1.0
+
+COPYRIGHT
+
+Copyright (C) 2012 Jaume Sola (jaumesola.com); All rights reserved.
+
+This copyright refers to all the source code and files in the original 
+Up'n'Link distribution package, except the third party components 
+mentioned below or where otherwise stated.
+
+
+SUMMARY
+
+If you obtained the original Up'n'Link distribution package with the default
+feature set (the "trunk") the following open source licenses apply: 
+GPL v3, BSD, MIT.
+
+In some cases, and specifically if you got a customized or modified version
+the licenses that apply might be different. 
+
+For further details, keep reading or check the latest licensing information at:
+http://jaumesola.com/licenses/upnlink.html
+
+
+TYPES OF FILES INCLUDED
+
+Normally you obtain this software as a set of files ("package").
+However not all of them necessarily share the same license terms.
+We can distinguish three cases:
+
+1) Files part of the Up'n'Link trunk
+2) Files part of Up'n'Link branches
+3) Files part of third party components
+
+
+LICENSE FOR UP'N'LINK TRUNK
+
+Files included in this package are part of the trunk, with the
+following exceptions:
+
+- where otherwise stated
+- those part of a branch
+- third party components mentioned below
+- unintentional omission or mistake
+
+The Up'n'Link trunk is publicly available under the: 
+
+GNU GENERAL PUBLIC LICENSE Version 3
+http://www.gnu.org/licenses/gpl-3.0.txt
+
+You may however obtain an alternative license from the copyright holder.
+In such case you should have a signed document stating your specific 
+license terms.
+
+
+LICENSE FOR UP'N'LINK BRANCHES
+
+Branches are used to add specific features, either generic or 
+customized for you. If you got a branch/customization, its files
+may be provided with a different license. In such case you normally
+will know.
+
+There were no publicly released branches when this file was written.
+
+
+THIRD PARTY COMPONENTS
+
+The following third party components are included:
+
+- Yahoo YUI uploader 2.9; Copyright (C) 2011 Yahoo! Inc. All rights reserved.
+  Code located in public/yui-2.9.0
+  Issued under the BSD LICENSE.
+  http://developer.yahoo.com/yui/uploader/
+  http://yuilibrary.com/license/
+
+- The Blueprint CSS framework; Copyright (C) 2007 Olav Bjorkoy (http://bjorkoy.com)
+  Code located at public/stylesheets/blueprint
+  It uses a modified MIT license
+  http://blueprintcss.org/
+  https://github.com/joshuaclayton/blueprint-css/wiki/License
+
+- jQuery JavaScript Library v1.5.2
+  Located at public/javasscripts
+  http://jquery.com/
+  Copyright 2011, John Resig
+  Dual licensed under the MIT or GPL Version 2 licenses.
+  http://jquery.org/license
+  Includes Sizzle.js
+  http://sizzlejs.com/
+  Copyright 2011, The Dojo Foundation
+  Released under the MIT, BSD, and GPL Licenses.
+  
+- PIE: CSS3 rendering for IE
+  Located at public/pie
+  Version 1.0beta4 
+  http://css3pie.com
+  Dual-licensed for use under the Apache License Version 2.0 or the General Public License (GPL) Version 2.
+
+- clearance-admin Rails plug-in
+  Located at vendor/plugins/clearance-admin
+  Copyright (C) 2009 FIX
+  MIT License
+  https://github.com/xenda/clearance-admin
+
+
+DEPENDENCIES
+
+The following software is not included but is required to run Up'n'Link.
+To our knowledge, they all use the MIT license.
+
+- Ruby
+- Ruby Gems:
+  - Rails 3
+  - Clearance
+  - CarrierWave
+  - jquery-rails
+
+Also some database is needed, SQLite (public domain) is used by default.
